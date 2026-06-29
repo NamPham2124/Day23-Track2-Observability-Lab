@@ -48,6 +48,8 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks: [obs]
 
   alertmanager:
@@ -59,6 +61,8 @@ services:
       - ./02-prometheus-grafana/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
     environment:
       SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL:-https://hooks.slack.com/services/REPLACE/ME}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks: [obs]
 
   grafana:
